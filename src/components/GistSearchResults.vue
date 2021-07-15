@@ -1,37 +1,30 @@
 <template>
   <div class="gist-search-results">
-    <div class="results-info">8 results found</div>
+    <div class="results-info">{{ userGistsLength || 'No' }} results found</div>
 
-    <div class="gist-items" v-for="(gist, idx) in gists" :key="idx">
-      <GistItem :gist="gist" />
+    <div v-if="userGistsLength">
+      <div class="gist-items" v-for="(gist, idx) in userGists" :key="idx">
+        <GistItem :gist="gist" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import GistItem from "./GistItem";
-import { getAllGist } from "../services/GistService";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     GistItem
   },
 
-  data() {
-    return {
-      gists: []
-    };
-  },
-
-  methods: {
-    async getGists() {
-      const gists = await getAllGist();
-      this.gists = gists;
-    }
+  computed: {
+    ...mapGetters(["userGists", "userGistsLength"])
   },
 
   created() {
-    this.getGists();
+    this.$store.dispatch("fetchAllGists");
   }
 };
 </script>

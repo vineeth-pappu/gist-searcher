@@ -1,5 +1,7 @@
 # gist-searcher
 
+[demo link](https://vineeth-pappu.github.io/gist-searcher/dist/#/)
+
 ## Project setup
 ```
 yarn install

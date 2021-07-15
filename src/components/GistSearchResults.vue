@@ -23,9 +23,7 @@ export default {
     ...mapGetters(["userGists", "userGistsLength"])
   },
 
-  created() {
-    this.$store.dispatch("fetchAllGists");
-  }
+  created() {}
 };
 </script>
 

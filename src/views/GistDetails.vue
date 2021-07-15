@@ -12,6 +12,7 @@
       <div class="gist-forks-list" v-for="(fork, idx) in gistDetails.forks" :key="idx">
         <GistForkInfo :fork="{fork}" />
       </div>
+      <div class="gist-forks-list" v-if="!gistDetails.forks || !gistDetails.forks.length">No Forks</div>
     </section>
   </div>
 </template>

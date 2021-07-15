@@ -1,7 +1,7 @@
 <template>
   <div class="gist-filters">
     <!-- <input type="search" name="search" id="search" v-model="searchStr" /> -->
-    <input type="search" name="search" id="search" @input="debounceInput" />
+    <input type="search" name="search" id="search" :value="searchStr" @input="debounceInput" />
   </div>
 </template>
 
@@ -13,15 +13,21 @@ export default {
     searchStr: {
       get() {
         return this.$store.state.gistFilters.searchStr;
-      },
-      set(value) {
-        this.$store.commit("updateGistFilter", { searchStr: value });
       }
     }
+    // searchStr: {
+    //   get() {
+    //     return this.$store.state.gistFilters.searchStr;
+    //   },
+    //   set(value) {
+    //     this.$store.commit("updateGistFilter", { searchStr: value });
+    //   }
+    // }
   },
 
   methods: {
     debounceInput: debounce(function(e) {
+      this.$store.commit("updateGistFilter", { searchStr: e.target.value });
       this.$store.dispatch("fetchAllGists", e.target.value);
     }, 500)
   }
